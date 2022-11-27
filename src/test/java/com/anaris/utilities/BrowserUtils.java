@@ -55,6 +55,16 @@ public class BrowserUtils {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
+    public static void waitForInvisibilityOf(WebElement element, int second){
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),second);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public static void waitForVisibilityOf(WebElement element, int second){
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(),second);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
 
     /**
      * This method will accept dropdown as a WebElement
@@ -166,7 +176,7 @@ public class BrowserUtils {
      * @param list of webelements
      * @return list of string
      */
-    public static List<String> getElementsText(List<WebElement> list) {
+    public static List<String> getElementsTextByList(List<WebElement> list) {
         List<String> elemTexts = new ArrayList<>();
         for (WebElement el : list) {
             elemTexts.add(el.getText());
@@ -180,7 +190,7 @@ public class BrowserUtils {
      * @param locator
      * @return list of strings
      */
-    public static List<String> getElementsText(By locator) {
+    public static List<String> getElementsTextByLocator(By locator) {
 
         List<WebElement> elems = Driver.getDriver().findElements(locator);
         List<String> elemTexts = new ArrayList<>();
@@ -495,6 +505,31 @@ public class BrowserUtils {
      */
     public static void waitForPresenceOfElement(By by, long time) {
         new WebDriverWait(Driver.getDriver(), time).until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public static void clickElement(WebElement element){
+        waitForVisibility(element,10);
+        waitFor(1);
+        element.click();
+    }
+    public static void clickWithSpecificText(List<WebElement> elements,String text){
+        for (WebElement element : elements) {
+            if (element.getText().equals(text)){
+                clickElement(element);
+                break;
+            }
+
+        }
+    }
+    public static boolean isAllSelected(List<WebElement> allFiles){
+
+        for (WebElement file : allFiles) {
+
+            if(!file.isSelected()){
+                return false;
+            }
+        }
+        return true;
     }
 
 

@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features" ,
         glue = "com/anaris/step_defs" ,
         dryRun = false,
-        tags = "@smoke",
+        tags = "@us_3 or @multi",
         publish = true
 )
 

@@ -1,5 +1,7 @@
 package com.anaris.pages;
 
+import com.anaris.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -61,6 +63,9 @@ public class AdidasPage extends BasePage {
     @FindBy(css = "button[class='confirm btn btn-lg btn-primary']")
     public WebElement confirmButton;
 
+    @FindBy (xpath = "//table//tbody[@id='tbodyid']//td[.= 'Dell i7 8gb']/following-sibling::td[2]/a")
+    public WebElement deleteDelli78Gb;
+
     @FindBy(xpath = "//tr[@class='success']")
     public List<WebElement> productsInCart;
 
@@ -78,6 +83,11 @@ public class AdidasPage extends BasePage {
         } else {
             System.out.println("FAILED");
         }
+    }
+
+    public void deleteProduct(String nameOfProduct){
+        String locator = "//table//tbody[@id='tbodyid']//td[.= '" + nameOfProduct + "']/following-sibling::td[2]/a";
+        Driver.getDriver().findElement(By.xpath(locator)).click();
     }
 
 
